@@ -1,6 +1,7 @@
 package com.takehome;
 
 import com.codahale.metrics.health.HealthCheck;
+import com.takehome.api.PushAndRecalculate;
 import com.takehome.resources.HelloWorldResource;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
@@ -26,9 +27,8 @@ public class DropWizardProjectApplication extends Application<DropWizardProjectC
     public void run(final DropWizardProjectConfiguration configuration,
                     final Environment environment) {
         // TODO: implement application
-        int total =0;
         environment.jersey().register(new HelloWorldResource());
-//        environment.jersey.register(new )
+        environment.jersey().register(new PushAndRecalculate());
         environment.healthChecks().register("CryptoService", new HealthCheck() {
             @Override
             protected Result check() throws Exception {

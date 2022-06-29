@@ -1,4 +1,7 @@
-com/takehome/DropWizardProjectApplication.class
+com/takehome/api/PushAndRecalculate.class
 com/takehome/DropWizardProjectApplication$1.class
 com/takehome/resources/HelloWorldResource.class
+com/takehome/DropWizardProjectApplication.class
+com/takehome/api/Decrypt.class
+com/takehome/api/PushAndRecalculateAndEncrypt.class
 com/takehome/DropWizardProjectConfiguration.class
