@@ -1,4 +1,4 @@
-# DropWizardProject
+# Crypto Service - Drop Wizard Application 
 
 How to start the DropWizardProject application
 ---
