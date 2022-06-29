@@ -11,3 +11,15 @@ Health Check
 ---
 
 To see your applications health enter url `http://localhost:8081/healthcheck`
+
+
+Design Choice's
+---
+To view Design Choices made in my implementation, please refer to the design.txt file in the root directory of this project! 
+
+
+Application Startup
+---
+To view start up instructions for this application please view the startup.txt file in root directory of this project! 
+
+
