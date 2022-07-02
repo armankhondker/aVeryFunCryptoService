@@ -4,4 +4,5 @@ com/takehome/resources/HelloWorldResource.class
 com/takehome/DropWizardProjectApplication.class
 com/takehome/api/Decrypt.class
 com/takehome/api/PushAndRecalculateAndEncrypt.class
+com/takehome/api/Reset.class
 com/takehome/DropWizardProjectConfiguration.class
