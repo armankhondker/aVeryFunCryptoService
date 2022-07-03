@@ -10,7 +10,7 @@ import static com.takehome.DropWizardProjectApplication.pushRecalculateAndEncryp
 public class PushAndRecalculateAndEncrypt {
     @POST
     @Consumes("application/json")
-    public byte[] post(int num){
+    public String post(int num) throws Exception {
         return pushRecalculateAndEncrypt(num);
     }
 }
