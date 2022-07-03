@@ -9,12 +9,6 @@ Startup Instructions: Crypto Service application
 1. Start the application with `java -jar target/dropwizardProject-1.0-SNAPSHOT.jar server config.yml`
 1. To check that the application is running enter url `http://localhost:8080`
 
-Health Check
----
-
-To see your applications health enter url `http://localhost:8081/healthcheck`
-
-
 Design Choice's
 ---
 To view Design Choices made in my implementation, please refer to the design.txt file in the root directory of this project! 
@@ -22,13 +16,15 @@ To view Design Choices made in my implementation, please refer to the design.txt
 Endpoints
 ---
 
-
-
-Application Startup
----
-To view start up instructions for this application please view the startup.txt file in root directory of this project! 
-
+`curl --location --request POST 'localhost:8080/push' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json' \
+--data-raw '6'`
 
 Author
 ---
-* **Arman Khondker** - Software Engineer, armankhondker@gmail.com
+**Arman Khondker** - Software Engineer, armankhondker@gmail.com
+
+References
+---
+
