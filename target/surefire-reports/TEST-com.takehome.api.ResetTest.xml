@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.takehome.api.ResetTest" time="0.141" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.takehome.api.ResetTest" time="0.167" tests="1" errors="0" skipped="0" failures="0">
   <properties>
+    <property name="idea.version" value="2022.1.2"/>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="java.vm.version" value="18.0.1.1+2-6"/>
     <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk-18.0.1.1.jdk/Contents/Home/lib"/>
@@ -21,26 +22,26 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="os.name" value="Mac OS X"/>
-    <property name="classworlds.conf" value="/usr/local/Cellar/maven/3.6.2/libexec/bin/m2.conf"/>
+    <property name="maven.ext.class.path" value="/Applications/IntelliJ IDEA CE.app/Contents/plugins/maven/lib/maven-event-listener.jar"/>
+    <property name="classworlds.conf" value="/Applications/IntelliJ IDEA CE.app/Contents/plugins/maven/lib/maven3/bin/m2.conf"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
     <property name="java.library.path" value="/Users/arman/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/>
-    <property name="maven.conf" value="/usr/local/Cellar/maven/3.6.2/libexec/conf"/>
+    <property name="maven.conf" value="/Applications/IntelliJ IDEA CE.app/Contents/plugins/maven/lib/maven3/conf"/>
     <property name="jdk.debug" value="release"/>
     <property name="java.class.version" value="62.0"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="os.version" value="11.2"/>
-    <property name="library.jansi.path" value="/usr/local/Cellar/maven/3.6.2/libexec/lib/jansi-native"/>
     <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="user.home" value="/Users/arman"/>
     <property name="user.timezone" value="America/Chicago"/>
     <property name="file.encoding" value="UTF-8"/>
     <property name="java.specification.version" value="18"/>
     <property name="user.name" value="arman"/>
-    <property name="java.class.path" value="/usr/local/Cellar/maven/3.6.2/libexec/boot/plexus-classworlds-2.6.0.jar"/>
+    <property name="java.class.path" value="/Applications/IntelliJ IDEA CE.app/Contents/plugins/maven/lib/maven3/boot/plexus-classworlds.license:/Applications/IntelliJ IDEA CE.app/Contents/plugins/maven/lib/maven3/boot/plexus-classworlds-2.6.0.jar"/>
     <property name="java.vm.specification.version" value="18"/>
     <property name="sun.arch.data.model" value="64"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher clean install"/>
+    <property name="sun.java.command" value="org.codehaus.classworlds.Launcher -Didea.version=2022.1.2 test"/>
     <property name="java.home" value="/Library/Java/JavaVirtualMachines/jdk-18.0.1.1.jdk/Contents/Home"/>
     <property name="apple.awt.application.name" value="Launcher"/>
     <property name="user.language" value="en"/>
@@ -49,16 +50,14 @@
     <property name="java.version" value="18.0.1.1"/>
     <property name="native.encoding" value="UTF-8"/>
     <property name="java.vendor" value="Oracle Corporation"/>
-    <property name="sun.stderr.encoding" value="UTF-8"/>
-    <property name="maven.home" value="/usr/local/Cellar/maven/3.6.2/libexec"/>
+    <property name="maven.home" value="/Applications/IntelliJ IDEA CE.app/Contents/plugins/maven/lib/maven3"/>
     <property name="file.separator" value="/"/>
     <property name="java.version.date" value="2022-04-22"/>
     <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
     <property name="sun.io.unicode.encoding" value="UnicodeBig"/>
     <property name="sun.cpu.endian" value="little"/>
-    <property name="sun.stdout.encoding" value="UTF-8"/>
     <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
   </properties>
-  <testcase name="resetTest" classname="com.takehome.api.ResetTest" time="0.141"/>
+  <testcase name="resetTest" classname="com.takehome.api.ResetTest" time="0.167"/>
 </testsuite>

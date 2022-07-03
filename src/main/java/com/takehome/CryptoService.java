@@ -24,9 +24,6 @@ public class CryptoService extends Application<DropWizardProjectConfiguration> {
     public static SecretKey key;
     public static byte[] iv;
 
-    public static void main(final String[] args) throws Exception {
-        new CryptoService().run(args);
-    }
     public CryptoService() throws Exception {
         runningStat = new DescriptiveStatistics();
         key = createKey();
@@ -122,6 +119,10 @@ public class CryptoService extends Application<DropWizardProjectConfiguration> {
 
     @Override
     public void initialize(final Bootstrap<DropWizardProjectConfiguration> bootstrap) {
+    }
+
+    public static void main(final String[] args) throws Exception {
+        new CryptoService().run(args);
     }
 
     @Override
