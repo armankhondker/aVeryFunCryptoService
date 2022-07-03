@@ -23,19 +23,17 @@ public class DropWizardProjectApplication extends Application<DropWizardProjectC
     private static DescriptiveStatistics runningStat;
     private static final String AES = "AES";
     private static final String AES_CIPHER_ALGORITHM = "AES/CBC/PKCS5PADDING";
-    private static SecretKey key;
+    public static SecretKey key;
+    public static byte[] iv;
 
     public static void main(final String[] args) throws Exception {
         new DropWizardProjectApplication().run(args);
     }
     public DropWizardProjectApplication() throws Exception {
         runningStat = new DescriptiveStatistics();
-        SecureRandom securerandom = new SecureRandom();
-        KeyGenerator keygenerator = KeyGenerator.getInstance(AES);
-        keygenerator.init(256, securerandom);
-        key = keygenerator.generateKey();
+        key = createKey();
+        iv = generateIv().getIV();
     }
-
     @Override
     public String getName() {
         return "DropWizardProject";
@@ -53,10 +51,9 @@ public class DropWizardProjectApplication extends Application<DropWizardProjectC
     public static String pushRecalculateAndEncrypt(int num) throws Exception{
         double mean = runningStat.getMean();
         double standardDeviation = Math.sqrt(runningStat.getPopulationVariance());
-        return base64Encode(encrypt(mean+ "", key, generateIv().getIV())) + " SPLLITER " + base64Encode(encrypt(standardDeviation+"", key, generateIv().getIV()));
-    }
-    public static String base64Encode(byte[] encryptedNumber){
-        return Base64.getEncoder().encodeToString(encryptedNumber);
+        byte[] encryptedMean = encrypt("99.6969", key, iv);
+        System.out.println(decrypt(encryptedMean, key, iv) + "HEY");
+        return base64Encode(encrypt(mean+ "", key, iv)) + " SPLLITER " + base64Encode(encrypt(standardDeviation+"", key, iv));
     }
 
     public static byte[] encrypt (String plainText, SecretKey key, byte [] iv) throws Exception{
@@ -64,10 +61,6 @@ public class DropWizardProjectApplication extends Application<DropWizardProjectC
         IvParameterSpec ivParameterSpec = new IvParameterSpec(iv);
         cipher.init(Cipher.ENCRYPT_MODE, key, ivParameterSpec);
         return cipher.doFinal(plainText.getBytes());
-    }
-
-    public static String decryptCaller(byte [] encryptedNumber) throws Exception {
-        return decrypt(encryptedNumber, key, generateIv().getIV());
     }
 
     public static String decrypt(byte [] cipherText, SecretKey key, byte [] iv) throws Exception{
@@ -78,10 +71,21 @@ public class DropWizardProjectApplication extends Application<DropWizardProjectC
         return new String(result);
     }
 
+    public static SecretKey createKey() throws Exception {
+        SecureRandom securerandom = new SecureRandom();
+        KeyGenerator keygenerator = KeyGenerator.getInstance(AES);
+        keygenerator.init(256, securerandom);
+        return keygenerator.generateKey();
+    }
+
     public static IvParameterSpec generateIv() {
         byte[] iv = new byte[16];
         new SecureRandom().nextBytes(iv);
         return new IvParameterSpec(iv);
+    }
+
+    public static String base64Encode(byte[] encryptedNumber){
+        return Base64.getEncoder().encodeToString(encryptedNumber);
     }
 
     public static void clearAllStatistics(){
