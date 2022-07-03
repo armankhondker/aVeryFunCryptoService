@@ -1,9 +1,6 @@
 # A "Very Fun" Crypto Service 
 
-A Crypto web service that uses symmetric encryption and implements several useful APIs: 
-1. PushAndRecalculate
-2. PushRecalculateAndEncrypt
-3. Decrypt
+A Crypto web service that uses symmetric encryption and implements several useful APIs: `PushAndRecalculate`, `PushRecalculateAndEncrypt`, and `Decrypt`.
 
 Application Startup
 ---
