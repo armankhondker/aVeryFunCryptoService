@@ -27,10 +27,10 @@ Design
 * We have an API folder to hold all the routing requests for our application. 
 * We utilize a main class `CryptoService` to hold all of our core logic and functionality.
 * Within our main class, we initialize several public/private variables whos scope depends on their purpose within the application. For example, we initialize several `private static final` variables that will never be utilized outside our main class and won't change. 
-* We initialize a **SecretKey** and **Initialization** Vector within our CrytoService constructor that will be used for all calls while the application is running. This ensures that when we instantiate our CryptoService object on application startup we guarentee to use the same secret key for all symmetric encryption within the application. 
+* We initialize a **SecretKey** and **Initialization Vector** within our CrytoService constructor that will be used for all calls while the application is running. This ensures that when we instantiate our CryptoService object on application startup we guarentee to use the same secret key for all symmetric encryption within the application. 
 
 #### AES Encryption
-* [AES](https://www.techtarget.com/searchsecurity/definition/Advanced-Encryption-Standard) Encryption was used over RSA Encryption since we wanted to use symmetric encryption and only one secret key for both encryption and decryption. 
+* [AES](https://www.techtarget.com/searchsecurity/definition/Advanced-Encryption-Standard) Encryption was used over RSA Encryption since we wanted to use symmetric encryption and use only one secret key for both encryption and decryption. 
 * Since we will only initialze one secret key and initialization vector during the lifespan of the applicaiton, we can't guarentee that future encrypt/decrypt calls will function once the application has stopped.
 
 
@@ -47,6 +47,7 @@ Design
 * Add integration tests 
 * DB Connection to store our API calls
 * HTTP Error Handling
+* Potential Refactoring within the APIs (perhaps consolidate to one API call for both pushes) 
 * Custom User Interface for interact with APIs
 
 #### Libaries Utilized
