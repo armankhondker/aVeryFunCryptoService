@@ -9,7 +9,14 @@ Startup Instructions
 
 Design Choice's
 ---
-To view Design Choices made in my implementation, please refer to the design.txt file in the root directory of this project! 
+#### Constraints 
+* 
+
+#### Libaries Utilized
+* [Apache DescriptiveStatistics](https://commons.apache.org/proper/commons-math/javadocs/api-3.3/org/apache/commons/math3/stat/descriptive/DescriptiveStatistics.html) - Calculate Mean and Standard Deviation
+* [Javax Crypto](https://docs.oracle.com/javase/7/docs/api/javax/crypto/package-summary.html) - Symmetric Encryption
+* [Java Security](https://docs.oracle.com/javase/8/docs/api/java/security/SecureRandom.html) - Secret Key and Random IV Generation
+* [Java Base 64](https://docs.oracle.com/javase/8/docs/api/java/util/Base64.html) - Base 64 encoding and decoding 
 
 
 Testing
@@ -19,7 +26,7 @@ Testing
 
 Endpoints
 ---
-### PushAndRecalculate API 
+#### PushAndRecalculate API 
 ```
 curl -L -X POST 'localhost:8080/push' \
 -H 'Accept: application/json' \
@@ -27,7 +34,7 @@ curl -L -X POST 'localhost:8080/push' \
 --data-raw '{INSERT_NUM}'
 ```
 
-### PushRecalculateAndEncrypt API
+#### PushRecalculateAndEncrypt API
 ```
 curl -L -X POST 'localhost:8080/encrypt' \
 -H 'Accept: application/json' \
@@ -35,7 +42,7 @@ curl -L -X POST 'localhost:8080/encrypt' \
 --data-raw '{INSERT_NUM}'
 ```
 
-### Decrypt API 
+#### Decrypt API 
 ```
 curl -L -X POST 'localhost:8080/decrypt' \
 -H 'Accept: application/json' \
@@ -44,9 +51,26 @@ curl -L -X POST 'localhost:8080/decrypt' \
 ```
 ##### Note: You can reset the statistics of the application for easier testing by using the reset API: `curl -L -X POST 'localhost:8080/reset'`
 
-Author
+Example Input/Output Sequence
 ---
-**Arman Khondker** - Software Engineer, armankhondker@gmail.com
+
+| API Call | Result (Mean, Standard Deviation)|
+| :-------- | :------|
+| PushAndRecalculate(4) | 4, 0 |
+| PushAndRecalculate(7) | 5.5, ~1.5 |
+| PushAndRecalculate(6) | 5.667, ~1.247 |
+| PushRecalculateAndEncrypt(6) | encrypted(6.5), encrypted(~1.802) |
+| Decrypt(encrypted(6.5)) | 6.5 |
+| Decrypt(encrypted(1.802)) | 1.802 |
+| PushAndRecalculate(1) | 5.4, ~2.728 |
+
+Technology
+---
+* [Dropwizard](http://www.dropwizard.io/) - Development Framework
+* [Java](https://docs.oracle.com/en/java/) - Language 
+* [JUnit5](https://junit.org/junit5/docs/current/user-guide/) - Unit Testing Framework 
+* [Maven](https://maven.apache.org/guides/index.html) - Build Management 
+* [AES](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard) - Symmetric Encryption 
 
 References
 ---
@@ -56,4 +80,8 @@ References
 * [Apache Descriptive Statisitics Libraray Documentation](https://commons.apache.org/proper/commons-math/javadocs/api-3.3/org/apache/commons/math3/stat/descriptive/DescriptiveStatistics.html)
 * [Standard Deviation Calculations](https://www.thoughtco.com/population-vs-sample-standard-deviations-3126372#:~:text=Qualitative%20Differences&text=The%20population%20standard%20deviation%20is,the%20individuals%20in%20a%20population.)
 * [Symmetric vs Asymmetric Encryption](https://www.ssl2buy.com/wiki/symmetric-vs-asymmetric-encryption-what-are-differences#:~:text=Symmetric%20encryption%20uses%20a%20single,and%20decrypt%20messages%20when%20communicating.)
+
+Author
+---
+**Arman Khondker** - Software Engineer, armankhondker@gmail.com
 
