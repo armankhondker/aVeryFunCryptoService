@@ -8,7 +8,7 @@ import static com.takehome.DropWizardProjectApplication.*;
 @Path("decrypt")
 public class Decrypt {
     @POST
-    public String post(byte [] encryptedNumber) throws Exception {
+    public String post(String encryptedNumber) throws Exception {
         return decrypt(encryptedNumber, key, iv);
     }
 }

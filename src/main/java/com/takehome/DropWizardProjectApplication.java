@@ -45,15 +45,20 @@ public class DropWizardProjectApplication extends Application<DropWizardProjectC
 
     public static String pushAndRecalculate(int num){
         runningStat.addValue(num);
-        return runningStat.getMean() + ", " + Math.sqrt(runningStat.getPopulationVariance());
+        double mean = runningStat.getMean();
+        double standardDeviation = Math.sqrt(runningStat.getPopulationVariance());
+        return mean + ", " + standardDeviation;
     }
 
     public static String pushRecalculateAndEncrypt(int num) throws Exception{
+        runningStat.addValue(num);
         double mean = runningStat.getMean();
         double standardDeviation = Math.sqrt(runningStat.getPopulationVariance());
-        byte[] encryptedMean = encrypt("99.6969", key, iv);
-        System.out.println(decrypt(encryptedMean, key, iv) + "HEY");
-        return base64Encode(encrypt(mean+ "", key, iv)) + " SPLLITER " + base64Encode(encrypt(standardDeviation+"", key, iv));
+        byte [] encryptedMean = encrypt(String.valueOf(mean), key, iv);
+        byte [] encryptedStandardDeviation = encrypt(String.valueOf(standardDeviation), key, iv);
+        System.out.println(decrypt(base64Encode(encryptedMean), key, iv));
+        System.out.println(decrypt(base64Encode(encryptedStandardDeviation), key, iv));
+        return base64Encode(encryptedMean) + ", " + base64Encode(encryptedStandardDeviation);
     }
 
     public static byte[] encrypt (String plainText, SecretKey key, byte [] iv) throws Exception{
@@ -63,11 +68,12 @@ public class DropWizardProjectApplication extends Application<DropWizardProjectC
         return cipher.doFinal(plainText.getBytes());
     }
 
-    public static String decrypt(byte [] cipherText, SecretKey key, byte [] iv) throws Exception{
+    public static String decrypt(String cipherText, SecretKey key, byte [] iv) throws Exception{
+        byte [] cipherTextArray = base64Decode(cipherText);
         Cipher cipher = Cipher.getInstance(AES_CIPHER_ALGORITHM);
         IvParameterSpec ivParameterSpec = new IvParameterSpec(iv);
         cipher.init(Cipher.DECRYPT_MODE, key, ivParameterSpec);
-        byte[] result = cipher.doFinal(cipherText);
+        byte[] result = cipher.doFinal(cipherTextArray);
         return new String(result);
     }
 
@@ -86,6 +92,9 @@ public class DropWizardProjectApplication extends Application<DropWizardProjectC
 
     public static String base64Encode(byte[] encryptedNumber){
         return Base64.getEncoder().encodeToString(encryptedNumber);
+    }
+    public static byte [] base64Decode(String encryptedNumber){
+        return Base64.getDecoder().decode(encryptedNumber);
     }
 
     public static void clearAllStatistics(){
