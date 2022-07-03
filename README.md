@@ -12,12 +12,12 @@ Application Startup
 Design 
 ---
 #### Constraints 
-* We an accept an input stream of positive, negative, and zero values. 
+* We expect an input stream of positive, negative, and zero values. 
 * We have limited RAM and for the storage of the input values.
 * No client authentication, nor server side TLS/SSL necessary
 
 #### Assumptions
-* We will only recieve integer as inputs to our API's that are within the valid range.
+* We will only recieve integer as inputs to our API's that are within the valid range (positive, negative, zero).
 * We will only initialize one symmetric key to be used to all of our encryption/decryption operations.
 * We don't need to store our API calls into any sort of database. 
 * We will only use one initlization vector for all encryption/decryption operations.
@@ -31,7 +31,7 @@ Design
 
 #### AES Encryption
 * [AES](https://www.techtarget.com/searchsecurity/definition/Advanced-Encryption-Standard) Encryption was used over RSA Encryption since we wanted to use symmetric encryption and only one secret key for both encryption and decryption. 
-* Since we will only initialze one secret key and initialization vector during the lifespan of the applicaiton, we can't guarentee that future encrypt/decrypt calls will function. 
+* Since we will only initialze one secret key and initialization vector during the lifespan of the applicaiton, we can't guarentee that future encrypt/decrypt calls will function once the application has stopped.
 
 
 #### Base 64 Encoding/Decoding
@@ -40,14 +40,14 @@ Design
 
 #### Additional Functionality
 * As I was testing this application, I found it very useful to have the ability to reset our running statistics calculation by hitting an endpoint without restarting the application. I implemented the reset endpoint to help solve this problem. 
-* I have added in the strucutre for our application to implemented DB logic and 
+* I have added in the structure for our application to implement DB logic
 
 #### Future Enhancements
 * Custom Logging for Error Messages
 * Add integration tests 
 * DB Connection to store our API calls
 * HTTP Error Handling
-
+* Custom User Interface for interact with APIs
 
 #### Libaries Utilized
 * [Apache DescriptiveStatistics](https://commons.apache.org/proper/commons-math/javadocs/api-3.3/org/apache/commons/math3/stat/descriptive/DescriptiveStatistics.html) - Calculate Mean and Standard Deviation
