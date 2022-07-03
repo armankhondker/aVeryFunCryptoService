@@ -9,17 +9,24 @@ import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
+import java.security.SecureRandom;
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
 
 public class DropWizardProjectApplication extends Application<DropWizardProjectConfiguration> {
-//    private static DoubleSummaryStatistics runningStat;
     private static DescriptiveStatistics runningStat;
+    private static final String AES = "AES";
+    private static SecretKey key;
 
     public static void main(final String[] args) throws Exception {
         new DropWizardProjectApplication().run(args);
     }
-    public DropWizardProjectApplication(){
+    public DropWizardProjectApplication() throws Exception {
         runningStat = new DescriptiveStatistics();
-        runningStat.clear();
+        SecureRandom securerandom = new SecureRandom();
+        KeyGenerator keygenerator = KeyGenerator.getInstance(AES);
+        keygenerator.init(256, securerandom);
+        key = keygenerator.generateKey();
     }
 
     @Override
@@ -44,6 +51,10 @@ public class DropWizardProjectApplication extends Application<DropWizardProjectC
         return null;
     }
 
+    public static void clearAllStatistics(){
+        runningStat.clear();
+    }
+
     @Override
     public void run(final DropWizardProjectConfiguration configuration,
                     final Environment environment) {
@@ -51,7 +62,7 @@ public class DropWizardProjectApplication extends Application<DropWizardProjectC
         environment.jersey().register(new PushAndRecalculateAndEncrypt());
         environment.jersey().register(new Decrypt());
         environment.jersey().register(new Reset());
-        environment.healthChecks().register("CryptoService", new HealthCheck() {
+        environment.healthChecks().register("\"Very Fun\" CryptoService!", new HealthCheck() {
             @Override
             protected Result check() throws Exception {
                 return Result.healthy();

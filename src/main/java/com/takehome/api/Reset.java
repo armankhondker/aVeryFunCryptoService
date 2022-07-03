@@ -3,10 +3,13 @@ package com.takehome.api;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 
-@Path("push")
+import static com.takehome.DropWizardProjectApplication.clearAllStatistics;
+
+@Path("reset")
 public class Reset {
     @POST
     public String reset(){
-        return "The running totals for average and standard deviation have been rest to 0";
+        clearAllStatistics();
+        return "The runningStats have been reset for our \"Very Fun\" Crypto Service application!";
     }
 }
