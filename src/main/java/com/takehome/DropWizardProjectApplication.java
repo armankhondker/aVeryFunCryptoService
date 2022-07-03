@@ -16,8 +16,6 @@ import javax.crypto.Cipher;
 import javax.crypto.spec
         .IvParameterSpec;
 import java.util.Base64;
-import javax.xml.bind
-        .DatatypeConverter;
 
 public class DropWizardProjectApplication extends Application<DropWizardProjectConfiguration> {
     private static DescriptiveStatistics runningStat;
@@ -43,6 +41,7 @@ public class DropWizardProjectApplication extends Application<DropWizardProjectC
     public void initialize(final Bootstrap<DropWizardProjectConfiguration> bootstrap) {
     }
 
+
     public static String pushAndRecalculate(int num){
         runningStat.addValue(num);
         double mean = runningStat.getMean();
@@ -50,17 +49,26 @@ public class DropWizardProjectApplication extends Application<DropWizardProjectC
         return mean + ", " + standardDeviation;
     }
 
+    /**
+     * @param num the number we want to add to our running statistics and encrypt
+     * @return the encrypted calculated mean and standard deviation of all numbers accepted in a Base64 encoding
+     * @throws Exception if our encryption algorithm fails
+     */
     public static String pushRecalculateAndEncrypt(int num) throws Exception{
-        runningStat.addValue(num);
-        double mean = runningStat.getMean();
-        double standardDeviation = Math.sqrt(runningStat.getPopulationVariance());
-        byte [] encryptedMean = encrypt(String.valueOf(mean), key, iv);
-        byte [] encryptedStandardDeviation = encrypt(String.valueOf(standardDeviation), key, iv);
-        System.out.println(decrypt(base64Encode(encryptedMean), key, iv));
-        System.out.println(decrypt(base64Encode(encryptedStandardDeviation), key, iv));
+        String stats = pushAndRecalculate(num);
+        String [] meanAndStandardDeviation = stats.split(",");
+        byte [] encryptedMean = encrypt(meanAndStandardDeviation[0], key, iv);
+        byte [] encryptedStandardDeviation = encrypt(meanAndStandardDeviation[1], key, iv);
         return base64Encode(encryptedMean) + ", " + base64Encode(encryptedStandardDeviation);
     }
 
+    /**
+     * @param plainText the text that we want to encrypt
+     * @param key the key we will use for all symmetric encryption
+     * @param iv the initialization vector we will use with an arbitrary value
+     * @return the encrypted string represented as a byte array
+     * @throws Exception if our encryption algorithm fails
+     */
     public static byte[] encrypt (String plainText, SecretKey key, byte [] iv) throws Exception{
         Cipher cipher = Cipher.getInstance(AES_CIPHER_ALGORITHM);
         IvParameterSpec ivParameterSpec = new IvParameterSpec(iv);
@@ -68,6 +76,13 @@ public class DropWizardProjectApplication extends Application<DropWizardProjectC
         return cipher.doFinal(plainText.getBytes());
     }
 
+    /**
+     * @param cipherText the string representation of our cipherText array that we will decrypt
+     * @param key the key we will use for all symmetric encryption
+     * @param iv the initialization vector we will use with an arbitrary value
+     * @return the plaintext decrypted version of our input
+     * @throws Exception
+     */
     public static String decrypt(String cipherText, SecretKey key, byte [] iv) throws Exception{
         byte [] cipherTextArray = base64Decode(cipherText);
         Cipher cipher = Cipher.getInstance(AES_CIPHER_ALGORITHM);
@@ -77,6 +92,10 @@ public class DropWizardProjectApplication extends Application<DropWizardProjectC
         return new String(result);
     }
 
+    /**
+     * @return our secret key that we will use for symmetric encryption
+     * @throws Exception if our secret key generations fails
+     */
     public static SecretKey createKey() throws Exception {
         SecureRandom securerandom = new SecureRandom();
         KeyGenerator keygenerator = KeyGenerator.getInstance(AES);
@@ -84,6 +103,9 @@ public class DropWizardProjectApplication extends Application<DropWizardProjectC
         return keygenerator.generateKey();
     }
 
+    /**
+     * @return an initialization vector that is required to avoid repetition during the encryption process
+     */
     public static IvParameterSpec generateIv() {
         byte[] iv = new byte[16];
         new SecureRandom().nextBytes(iv);
@@ -93,6 +115,7 @@ public class DropWizardProjectApplication extends Application<DropWizardProjectC
     public static String base64Encode(byte[] encryptedNumber){
         return Base64.getEncoder().encodeToString(encryptedNumber);
     }
+
     public static byte [] base64Decode(String encryptedNumber){
         return Base64.getDecoder().decode(encryptedNumber);
     }
