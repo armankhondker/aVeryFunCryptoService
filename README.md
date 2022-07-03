@@ -121,5 +121,5 @@ References
 
 Author
 ---
-**Arman Khondker** - Software Engineer, armankhondker@gmail.com
+[**Arman Khondker**](https://www.linkedin.com/in/armankhondker) - Software Engineer, armankhondker@gmail.com
 
