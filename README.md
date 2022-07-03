@@ -1,16 +1,40 @@
 # A Very Fun Crypto Service 
 
-Startup Instructions
+A Crypto web service that uses symmetric encryption and implements several useful APIs: 
+1. PushAndRecalculate
+2. PushRecalculateAndEncrypt
+3. Decrypt
+
+Application Startup
 ---
 
 1. Run `mvn clean install` to build the application
 1. Start the application with `java -jar target/dropwizardProject-1.0-SNAPSHOT.jar server config.yml`
 1. To check that the application is running enter url `http://localhost:8080`
 
-Design Choice's
+Design 
 ---
 #### Constraints 
+* We an accept an input stream of positive, negative, and zero values. 
+* We have limited RAM and for the storage of the input values.
+* No client authentication, nor server side TLS/SSL necessary
+
+#### Assumptions
+* We will only recieve integer as inputs to our API's that are within the valid range.
+* We will only initialize one symmetric key to be used to all of our encryption/decryption operations.
 * 
+
+
+#### Additional Functionality
+* As I was testing this application, I found it very useful to have the ability to reset our running statistics calculation by hitting an endpoint without restarting the application. I implemented the reset endpoint to help solve this problem. 
+* I have added in the strucutre for our application to implemented DB logic and 
+
+#### Future Enhancements
+* Custom Logging for Error Messages
+* Add integration tests 
+* DB Connection to store our running statistics
+* HTTP Error Handling 
+
 
 #### Libaries Utilized
 * [Apache DescriptiveStatistics](https://commons.apache.org/proper/commons-math/javadocs/api-3.3/org/apache/commons/math3/stat/descriptive/DescriptiveStatistics.html) - Calculate Mean and Standard Deviation
@@ -49,7 +73,7 @@ curl -L -X POST 'localhost:8080/decrypt' \
 -H 'Content-Type: application/json' \
 --data-raw '{INSERT_ENCRYPTED_NUM}'
 ```
-##### Note: You can reset the statistics of the application for easier testing by using the reset API: `curl -L -X POST 'localhost:8080/reset'`
+##### Note: You can reset the statistics of the application for while testing by using the reset API: `curl -L -X POST 'localhost:8080/reset'`
 
 Example Input/Output Sequence
 ---
