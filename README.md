@@ -19,7 +19,19 @@ Design
 #### Assumptions
 * We will only recieve integer as inputs to our API's that are within the valid range.
 * We will only initialize one symmetric key to be used to all of our encryption/decryption operations.
-* 
+* We don't need to store our API calls into any sort of database. 
+
+#### High-Level Components
+* We have an API folder to hold all the routing requests for our application. 
+* We utilize a main class `CryptoService` to hold all of our core logic and functionality.
+* Within our main class, we initialize several public/private variables whos scope depends on their purpose within the application. For example, we initialize several `private static final` variables that will never be utilized outside our main class and won't change. 
+* We initialize a SecretKey and Initialization Vector within our CrytoService constructor that will be used for all calls while the application is running. This ensures that when we instantiate our CryptoService object on application startup we guarentee to use the same secret key for all symmetric encryption within the application. 
+
+#### AES Encryption
+* [AES](https://www.techtarget.com/searchsecurity/definition/Advanced-Encryption-Standard) Encryption was used over RSA Encryption since we wanted to use symmetric encryption and only one secret key for both encryption and decryption. 
+
+#### Base 64 Encoding/Decoding
+* Base 64 was used as the Encoding Schema for Encoding and Decoding since this would allow us to send our encrpytion over the wire. For example, without this Base 64 encoding our API output's for the `PushRecalculateAndEncrpyt` call would not be able to be decoded directly. 
 
 
 #### Additional Functionality
@@ -29,8 +41,8 @@ Design
 #### Future Enhancements
 * Custom Logging for Error Messages
 * Add integration tests 
-* DB Connection to store our running statistics
-* HTTP Error Handling 
+* DB Connection to store our API calls
+* HTTP Error Handling
 
 
 #### Libaries Utilized
