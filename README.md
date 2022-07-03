@@ -1,4 +1,4 @@
-# Crypto Service - Drop Wizard Application 
+# A Very Fun Crypto Service 
 
 How to start the DropWizardProject application
 ---
