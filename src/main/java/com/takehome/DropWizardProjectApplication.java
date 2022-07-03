@@ -5,16 +5,21 @@ import com.takehome.api.Decrypt;
 import com.takehome.api.PushAndRecalculate;
 import com.takehome.api.PushAndRecalculateAndEncrypt;
 import com.takehome.api.Reset;
-import com.takehome.resources.HelloWorldResource;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 
 public class DropWizardProjectApplication extends Application<DropWizardProjectConfiguration> {
-    public static int sum = 0;
-    public static int length = 0;
+//    private static DoubleSummaryStatistics runningStat;
+    private static DescriptiveStatistics runningStat;
+
     public static void main(final String[] args) throws Exception {
         new DropWizardProjectApplication().run(args);
+    }
+    public DropWizardProjectApplication(){
+        runningStat = new DescriptiveStatistics();
+        runningStat.clear();
     }
 
     @Override
@@ -24,22 +29,19 @@ public class DropWizardProjectApplication extends Application<DropWizardProjectC
 
     @Override
     public void initialize(final Bootstrap<DropWizardProjectConfiguration> bootstrap) {
-
     }
 
     public static String pushAndRecalculate(int num){
-        sum+=num;
-        length++;
-        return "Current val: " + num + "Total sum:" + sum;
+        runningStat.addValue(num);
+        return runningStat.getMean() + " " + Math.sqrt(runningStat.getPopulationVariance());
     }
 
-
-    public int getMean(){
-        return 1;
+    public static byte[] pushRecalculateAndEncrypt(int num){
+        return null;
     }
 
-    public int getStandardDeviation(){
-        return -1;
+    public static String decrypt(byte [] encryptedNumber){
+        return null;
     }
 
     @Override

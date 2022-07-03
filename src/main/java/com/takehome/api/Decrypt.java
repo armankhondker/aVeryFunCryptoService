@@ -1,13 +1,14 @@
 package com.takehome.api;
 
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+
+import static com.takehome.DropWizardProjectApplication.decrypt;
 
 @Path("decrypt")
 public class Decrypt {
     @POST
-    public Double get(byte [] encryptedNumber){
-        return 3.14;
+    public String post(byte [] encryptedNumber){
+        return decrypt(encryptedNumber);
     }
 }
