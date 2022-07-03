@@ -32,15 +32,6 @@ public class CryptoService extends Application<DropWizardProjectConfiguration> {
         key = createKey();
         iv = generateIv().getIV();
     }
-    @Override
-    public String getName() {
-        return "DropWizardProject";
-    }
-
-    @Override
-    public void initialize(final Bootstrap<DropWizardProjectConfiguration> bootstrap) {
-    }
-
 
     public static String pushAndRecalculate(int num){
         runningStat.addValue(num);
@@ -122,6 +113,15 @@ public class CryptoService extends Application<DropWizardProjectConfiguration> {
 
     public static void clearAllStatistics(){
         runningStat.clear();
+    }
+
+    @Override
+    public String getName() {
+        return "Crypto Service";
+    }
+
+    @Override
+    public void initialize(final Bootstrap<DropWizardProjectConfiguration> bootstrap) {
     }
 
     @Override

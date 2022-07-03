@@ -8,7 +8,7 @@ import static com.takehome.CryptoService.*;
 @Path("decrypt")
 public class Decrypt {
     @POST
-    public String post(String encryptedNumber) throws Exception {
+    public static String post(String encryptedNumber) throws Exception {
         return decrypt(encryptedNumber, key, iv);
     }
 }

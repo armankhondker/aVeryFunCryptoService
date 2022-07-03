@@ -38,4 +38,23 @@ class PushAndRecalculateTest {
         String actualStandardDeviation = res.split(",")[1];
         assertEquals(expectedStandardDeviation, Double.valueOf(expectedStandardDeviation));
     }
+
+    @Test
+    public void testZeroes() {
+        PushAndRecalculate.post(5);
+        PushAndRecalculate.post(5);
+        PushAndRecalculate.post(10);
+        PushAndRecalculate.post(0);
+        String res = PushAndRecalculate.post(0);
+        String actualMean = res.split(",")[0];
+        assertEquals(4.0, Double.valueOf(actualMean));
+    }
+
+    @Test
+    public void testNegatives() {
+        PushAndRecalculate.post(-20);
+        String res = PushAndRecalculate.post(10);
+        String actualMean = res.split(",")[0];
+        assertEquals(-5.0, Double.valueOf(actualMean));
+    }
 }

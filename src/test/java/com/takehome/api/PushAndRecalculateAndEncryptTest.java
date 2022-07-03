@@ -20,24 +20,33 @@ class PushAndRecalculateAndEncryptTest {
     }
 
     @Test
-    public void testMean() {
-        double expectedMean = (double) 17/3;
-
-        PushAndRecalculate.post(4);
-        PushAndRecalculate.post(7);
-        String res = PushAndRecalculate.post(6);
-        String actualMean = res.split(",")[0];
-        assertEquals(expectedMean, Double.valueOf(actualMean));
+    public void testMean() throws Exception {
+        PushAndRecalculateAndEncrypt.post(4);
+        PushAndRecalculateAndEncrypt.post(7);
+        String res = PushAndRecalculateAndEncrypt.post(6);
+        String actualEncryptedMean = res.split(",")[0];
+        assertTrue(actualEncryptedMean.length()>0);
     }
 
     @Test
-    public void testStandardDeviation() {
-        double expectedStandardDeviation = 1.2472191289246;
+    public void testStandardDeviation() throws Exception {
+        PushAndRecalculateAndEncrypt.post(4);
+        PushAndRecalculateAndEncrypt.post(7);
+        String res = PushAndRecalculateAndEncrypt.post(6);
+        String actualEncryptedStandardDeviation = res.split(",")[1];
+        assertTrue(actualEncryptedStandardDeviation.length()>0);
+    }
 
-        PushAndRecalculate.post(4);
-        PushAndRecalculate.post(7);
+    /** Tests the combiation of doing a /push request and a /encrypt request
+     * @throws Exception
+     */
+    @Test
+    public void testPushAndEncrypt() throws Exception {
+        double expectedStandardDeviation = 1.247219128924647;
+        PushAndRecalculateAndEncrypt.post(4);
+        PushAndRecalculateAndEncrypt.post(7);
         String res = PushAndRecalculate.post(6);
         String actualStandardDeviation = res.split(",")[1];
-        assertEquals(expectedStandardDeviation, Double.valueOf(expectedStandardDeviation));
+        assertEquals(expectedStandardDeviation, Double.valueOf(actualStandardDeviation));
     }
 }
