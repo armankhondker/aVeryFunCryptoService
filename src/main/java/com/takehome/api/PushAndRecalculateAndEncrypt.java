@@ -4,7 +4,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 
-import static com.takehome.DropWizardProjectApplication.pushRecalculateAndEncrypt;
+import static com.takehome.CryptoService.pushRecalculateAndEncrypt;
 
 @Path("encrypt")
 public class PushAndRecalculateAndEncrypt {
