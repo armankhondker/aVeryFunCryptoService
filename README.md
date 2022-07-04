@@ -45,7 +45,7 @@ Design
 * I have added in the structure for our application to implement DB logic
 * We can configure the config.yml to specify run configurations for our application depending on the environment
 
-#### Future Enhancements
+#### Potential Next Steps
 * Custom Logging for Error Messages
 * Add integration tests 
 * DB Connection to store our API calls
