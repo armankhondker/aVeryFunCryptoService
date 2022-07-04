@@ -41,6 +41,7 @@ Design
 #### Additional Functionality
 * As I was testing this application, I found it very useful to have the ability to reset our running statistics calculation by hitting an endpoint without restarting the application. I implemented the reset endpoint to help solve this problem. 
 * I have added in the structure for our application to implement DB logic
+* We can configure the config.yml to specify run configurations for our application depending on the environment
 
 #### Future Enhancements
 * Custom Logging for Error Messages
