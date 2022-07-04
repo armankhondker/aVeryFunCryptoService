@@ -28,6 +28,8 @@ Design
 * We utilize a main class `CryptoService` to hold all of our core logic and functionality.
 * Within our main class, we initialize several public/private variables whos scope depends on their purpose within the application. For example, we initialize several `private static final` variables that will never be utilized outside our main class and won't change. 
 * We initialize a **SecretKey** and **Initialization Vector** within our CrytoService constructor that will be used for all calls while the application is running. This ensures that when we instantiate our CryptoService object on application startup we guarentee to use the same secret key for all symmetric encryption within the application. 
+* The application has been built with clean coding principles and mantinabiltity/extensiability in mind. We leverage the use of serveral Object-Oriented Programming princples and can easily extend this application to include future features and enhancements if required. 
+
 
 #### AES Encryption
 * [AES](https://www.techtarget.com/searchsecurity/definition/Advanced-Encryption-Standard) Encryption was used over RSA Encryption since we wanted to use symmetric encryption and use only one secret key for both encryption and decryption. 
