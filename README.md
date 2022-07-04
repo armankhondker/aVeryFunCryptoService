@@ -1,4 +1,4 @@
-# 🚀 A "Very Fun" Crypto Service 🚀
+# A "Very Fun" Crypto Service!
 
 A Crypto web service that uses symmetric encryption and implements several useful APIs: `PushAndRecalculate`, `PushRecalculateAndEncrypt`, and `Decrypt`.
 
